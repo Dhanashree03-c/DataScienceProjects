@@ -1,7 +1,7 @@
 #Bio Data
 print("-----Your Bio Data-----")
 name = input("What is your name? ")
-age = input("How old are you? ")
+age = int(input("How old are you? "))
 hobby = input("What is your favourite hobby? ")
 city = input("Where do you live? ")
 
