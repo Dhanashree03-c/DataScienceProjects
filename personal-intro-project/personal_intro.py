@@ -5,7 +5,7 @@ age = input("How old are you? ")
 hobby = input("What is your favourite hobby? ")
 city = input("Where do you live? ")
 
-print(f"\U0001F389 Welcome {name}!\U0001F389")
+print(f"\n\U0001F389 Welcome {name}!\U0001F389")
 print(f"Your are {age} years old and love {hobby}.")
 print(f"You live in {city}.")
 
