@@ -11,9 +11,7 @@ This project is a beginner-friendly Python application that collects a user's pe
 - Display formatted output using f-strings
 - Follow proper GitHub project structure and documentation standards
 
-## Setup Instructions
-
-### Step 1: Install Python
+### Install Python
 Download and install Python 3.x from:
 https://www.python.org/downloads/
 
