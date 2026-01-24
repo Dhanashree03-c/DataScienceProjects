@@ -1,0 +1,34 @@
+Test Case 1:
+Name: Priya
+Marks: 85
+Expected Grade: B
+
+Test Case 2:
+Name: Shree
+Marks: 93.6
+Expected Grade: A
+
+Test Case 3:
+Name: Ash
+Marks: 79
+Expected Grade: C
+
+Test Case 4:
+Name: Shreyas
+Marks: 67
+Expected Grade: D
+
+Test Case 5:
+Name: Aradhya
+Marks: 50
+Expected Grade: F
+
+Test Case 6:
+Name: Harsh
+Marks: 120
+Expected result: Invalid input
+
+Test Case 7:
+Name: Anchal
+Marks: -3
+Expected Result: Invalid input
