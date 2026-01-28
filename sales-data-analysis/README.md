@@ -12,17 +12,6 @@ This project performs exploratory data analysis and business metric evaluation o
 - Identify top-performing regions
 - Generate a clean and formatted sales report
 
----
-
-## Project Structure
-sales-data-analysis/
-│
-├── sales_analysis.py # Main Python script
-├── sales_data.csv # Sales dataset
-├── analysis_report.md # Detailed analysis report
-├── README.md # Project documentation
-└── requirements.txt # Python dependencies
-
 ## Technologies Used
 - **Python 3**
 - **pandas**
