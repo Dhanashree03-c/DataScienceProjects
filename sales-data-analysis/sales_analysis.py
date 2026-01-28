@@ -1,12 +1,12 @@
 import pandas as pd
 from typing import Tuple
 
-#Configuration
+#CONFIGURATION
 #to keep important data paths and formats in one place
 DATA_PATH = 'sales_data.csv'
 DATE_FORMAT = '%d-%m-%Y'
 
-#Utility Functions
+#UTILTY FUNCTIONS
 def load_data(file_path: str) -> pd.DataFrame:
     return pd.read_csv(file_path)    #read csv file and return dataframe
 
@@ -78,7 +78,7 @@ def print_report(
     print(f"\nTop-performing Region: {top_region}")
     print("\n" + "-" * 42)
 
-#Main Execution
+#MAIN FUNCTION
 def main() -> None:
     
     df = load_data(DATA_PATH)
