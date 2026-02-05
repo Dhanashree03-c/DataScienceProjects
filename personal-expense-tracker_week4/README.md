@@ -22,7 +22,7 @@ The dataset containg **4,597 expenses records** with the following fields:
 The dataset was downloaded from Kaggle:
 https://www.kaggle.com/datasets/ismetsemedov/personal-budget-transactions-dataset
 
-The Kaggle dataset includes approximately **3,600+ expense records** with columns such as `date`, `category`, and `amount`. :contentReference[oaicite:2]{index=2}
+The Kaggle dataset includes approximately **3,600+ expense records** with columns such as `date`, `category`, and `amount`.
 
 The version used in this repository has been preprocessed and extended to ~4,597 records for thorough analysis.
 
@@ -43,9 +43,9 @@ python main.py
 
 ## Visualization Generated
 The following charts are generated and saved to visualizations/:
-### Bar Chart - Expense by Category
-### Pie Chart - Expense Distribution
-### Line Chart - Monthly Expense Trend
+* Bar Chart - Expense by Category
+* Pie Chart - Expense Distribution
+* Line Chart - Monthly Expense Trend
 
 ## Report Output
 The automated Markdown report includes:
