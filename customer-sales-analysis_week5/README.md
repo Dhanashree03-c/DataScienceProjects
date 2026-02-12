@@ -83,31 +83,21 @@ The analysis is implemented using Python and Pandas, following industry best pra
 - Customer Lifetime Value Distribution
 
 ## Sample Metrics
-
 - Total Revenue
 - Total Customers
 - Average Order Value
 - Top Customer by Lifetime Value
 - Customer Churn Rate
 
-## Business Insights
-
-- East region generates highest revenue
-- Phones are the best-selling product
-- Month-to-month customers exhibit higher churn
-- High lifetime customers generally have longer tenure
-- Phone and Headphones show strong cross-selling potential
-
 ## How to Run
-
 1. Clone the repository
 
-https://github.com/Dhanashree03-c/DataScienceProjects.git
+   https://github.com/Dhanashree03-c/DataScienceProjects.git
 
 2. Navigate to the file folder
 
-customer-sales-analysis_week5
+   customer-sales-analysis_week5
 
 3. Run the command in terminal
 
-python notebook
+   python notebook
