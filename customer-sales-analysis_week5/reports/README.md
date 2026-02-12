@@ -100,6 +100,14 @@ The analysis is implemented using Python and Pandas, following industry best pra
 
 ## How to Run
 
+1. Clone the repository
 
+https://github.com/Dhanashree03-c/DataScienceProjects.git
 
+2. Navigate to the file folder
 
+customer-sales-analysis_week5
+
+3. Run the command in terminal
+
+python notebook
