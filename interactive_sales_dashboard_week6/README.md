@@ -28,7 +28,7 @@ This project demonstrates:
 git clone https://github.com/Dhanashree03-c/DataScienceProjects.git
 cd interactive_sales_dashboard_week6
 
-## 2️⃣ Create Virtual Environment (Recommended)
+## Create Virtual environment (Recommended)
 
 ```bash
 python -m venv venv
@@ -48,7 +48,7 @@ venv\Scripts\activate
 
 ---
 
-## 3️⃣ Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4️⃣ Run Streamlit Dashboard
+## Run Streamlit Dashboard
 
 ```bash
 streamlit run dashboard.py
