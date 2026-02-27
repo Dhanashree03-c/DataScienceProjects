@@ -1,0 +1,5 @@
+HYPOTHESIS TEST RESULTS
+
+Revenue vs Churn p-value: 0.08947978844071092
+MonthlyCharges by Contract p-value: 0.9692123527253496
+Revenue vs SeniorCitizen p-value: 0.2621306032474888
