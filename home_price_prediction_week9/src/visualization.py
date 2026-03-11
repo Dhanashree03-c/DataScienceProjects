@@ -1,6 +1,5 @@
 """
-Visualization Module
-Functions for data visualization and model prediction plots
+Visualization utilities for data exploration and predictions.
 """
 
 import matplotlib.pyplot as plt
@@ -8,58 +7,36 @@ import seaborn as sns
 
 
 def plot_area_vs_price(data):
-    """
-    Scatter plot: Area vs Price
-    """
 
     plt.figure(figsize=(8,6))
-
-    sns.scatterplot(
-        x="Area",
-        y="Price",
-        data=data
-    )
-
-    plt.title("Area vs House Price")
-
+    sns.scatterplot(x="Area", y="Price", data=data)
+    plt.title("Area vs Price")
     plt.show()
 
 
 def plot_location_vs_price(data):
-    """
-    Box plot: Location vs Price
-    """
 
     plt.figure(figsize=(8,6))
-
-    sns.boxplot(
-        x="Location",
-        y="Price",
-        data=data
-    )
-
+    sns.boxplot(x="Location", y="Price", data=data)
     plt.title("Location vs Price")
-
     plt.show()
 
 
-def plot_predictions_vs_actual(y_test, predictions, save_path):
-    """
-    Plot predicted vs actual house prices.
-    """
+def plot_predictions_vs_actual(y_true, y_pred, save_path):
 
     plt.figure(figsize=(8,6))
 
-    plt.scatter(y_test, predictions)
+    plt.scatter(y_true, y_pred)
 
     plt.xlabel("Actual Prices")
     plt.ylabel("Predicted Prices")
 
-    plt.title("Actual vs Predicted Prices")
+    plt.title("Actual vs Predicted House Prices")
 
     plt.plot(
-        [y_test.min(), y_test.max()],
-        [y_test.min(), y_test.max()]
+        [y_true.min(), y_true.max()],
+        [y_true.min(), y_true.max()],
+        color="red"
     )
 
     plt.savefig(save_path)

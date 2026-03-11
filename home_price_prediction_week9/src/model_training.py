@@ -1,6 +1,6 @@
 """
 Model Training Module
-Contains functions to train ML models
+Contains functions to train different machine learning models.
 """
 
 from sklearn.pipeline import Pipeline
@@ -10,41 +10,32 @@ from sklearn.ensemble import RandomForestRegressor
 
 
 def train_linear_regression(preprocessor, X_train, y_train):
-    """
-    Train Linear Regression model.
-    """
 
-    model = Pipeline(steps=[
+    pipeline = Pipeline([
         ("preprocessing", preprocessor),
         ("model", LinearRegression())
     ])
 
-    model.fit(X_train, y_train)
+    pipeline.fit(X_train, y_train)
 
-    return model
+    return pipeline
 
 
 def train_decision_tree(preprocessor, X_train, y_train):
-    """
-    Train Decision Tree Regressor.
-    """
 
-    model = Pipeline(steps=[
+    pipeline = Pipeline([
         ("preprocessing", preprocessor),
         ("model", DecisionTreeRegressor(random_state=42))
     ])
 
-    model.fit(X_train, y_train)
+    pipeline.fit(X_train, y_train)
 
-    return model
+    return pipeline
 
 
 def train_random_forest(preprocessor, X_train, y_train):
-    """
-    Train Random Forest Regressor.
-    """
 
-    model = Pipeline(steps=[
+    pipeline = Pipeline([
         ("preprocessing", preprocessor),
         ("model", RandomForestRegressor(
             n_estimators=100,
@@ -52,6 +43,6 @@ def train_random_forest(preprocessor, X_train, y_train):
         ))
     ])
 
-    model.fit(X_train, y_train)
+    pipeline.fit(X_train, y_train)
 
-    return model
+    return pipeline
