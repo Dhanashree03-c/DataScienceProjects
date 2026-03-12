@@ -65,11 +65,5 @@ pip install -r requirements.txt
 ## Run Notebook
 
 ```bash
-jupyter notebook notebooks/house_price_prediction.ipynb
+jupyter notebook notebook/house_price_prediction.ipynb
 ```
-
-## Future Work
-
-- Hyperparameter optimization
-- Larger dataset
-- Deploy model using Flask or Streamlit
