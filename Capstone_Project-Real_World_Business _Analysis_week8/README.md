@@ -54,8 +54,8 @@ By analyzing historical customer data and building a churn prediction model, the
 
 ```bash
 
-git clone https://github.com/your-username/customer-churn-capstone.git
-cd customer-churn-capstone
+git clone https://github.com/Dhanashree03-c/DataScienceProjects
+cd Capstone_Project-Real_World_Business_Analysis_week8
 
 ### Create a Virtual Environment
 python -m venv venv
