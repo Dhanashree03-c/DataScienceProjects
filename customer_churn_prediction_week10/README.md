@@ -1,6 +1,6 @@
-# 📊 Customer Churn Prediction Pipeline
+# Customer Churn Prediction Pipeline
 
-## 🚀 Project Overview
+## Project Overview
 
 This project focuses on building a **robust data preprocessing and feature engineering pipeline** to predict customer churn in a telecom dataset.
 
@@ -11,9 +11,7 @@ Customer churn prediction helps businesses:
 
 The project emphasizes **clean architecture, reusable code, and production-ready pipelines**.
 
----
-
-## 🎯 Objectives
+## Objectives
 
 - Perform data preprocessing and cleaning
 - Apply multiple encoding techniques
@@ -23,9 +21,7 @@ The project emphasizes **clean architecture, reusable code, and production-ready
 - Build a reusable machine learning pipeline
 - Evaluate model performance with proper metrics
 
----
-
-## 📂 Project Structure
+## Project Structure
 customer_churn_prediction_week10/
 │
 ├── data/
@@ -53,7 +49,7 @@ customer_churn_prediction_week10/
 ├── requirements.txt
 └── README.md
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Clone Repository
 git clone https://github.com/Dhanashree03-c/DataScienceProjects
