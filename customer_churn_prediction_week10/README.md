@@ -185,11 +185,3 @@ Stored in: screenshots/
 ## Author
 
 **Dhanashree Tankar**
-
-## Acknowledgements
-
-Dataset inspired by telecom churn prediction problems.
-
-## Note
-
-This project demonstrates **end-to-end data preprocessing and feature engineering** with a strong focus on both **technical excellence and business understanding**, making it suitable for **internship and entry-level ML roles**.
