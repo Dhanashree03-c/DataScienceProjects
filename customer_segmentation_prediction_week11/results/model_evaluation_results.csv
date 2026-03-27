@@ -1,0 +1,4 @@
+Segment,Best_Params,Accuracy,Precision,Recall,F1,ROC_AUC
+1,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}",0.9722222222222222,1.0,0.75,0.8571428571428571,1.0
+0,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}",1.0,1.0,1.0,1.0,1.0
+2,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}",1.0,1.0,1.0,1.0,1.0
