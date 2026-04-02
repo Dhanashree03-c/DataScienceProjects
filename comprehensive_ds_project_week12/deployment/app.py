@@ -1,213 +1,169 @@
 """
-Customer Churn Prediction App
---------------------------------
-Streamlit web application for predicting telecom customer churn.
-
+Customer Churn Prediction Web App
 Author: Dhanashree Tankar
+
+Streamlit application for predicting customer churn
+using a trained Random Forest model.
 """
 
+# 1. IMPORT LIBRARIES
 import streamlit as st
 import pandas as pd
 import joblib
-import numpy as np
+import logging
 
-# -------------------------------------------------------
-# PAGE CONFIG
-# -------------------------------------------------------
-
+# 2. PAGE CONFIGURATION (MUST BE FIRST STREAMLIT COMMAND)
 st.set_page_config(
-    page_title="Customer Churn Predictor",
+    page_title="Customer Churn Prediction",
     page_icon="📉",
-    layout="wide"
+    layout="centered"
 )
 
-# -------------------------------------------------------
-# LOAD MODEL
-# -------------------------------------------------------
+# 3. CONFIGURATION
+MODEL_PATH = "model.pkl"
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# 4. LOAD MODEL
 @st.cache_resource
 def load_model():
-    model = joblib.load("deployment/model.pkl")
-    return model
+    """Load trained ML model"""
+    try:
+        model = joblib.load(MODEL_PATH)
+        logger.info("Model loaded successfully")
+        return model
+    except Exception as e:
+        logger.error(f"Model loading failed: {e}")
+        return None
+
 
 model = load_model()
 
-# -------------------------------------------------------
-# TITLE
-# -------------------------------------------------------
+if model is None:
+    st.error("❌ Error loading model. Please check model.pkl file.")
 
+# 5. APP TITLE
 st.title("📉 Customer Churn Prediction System")
 
-st.markdown("""
-Predict whether a telecom customer is likely to **churn** based on subscription
-details and behavioral attributes.
+st.write(
+"""
+This application predicts whether a telecom customer is likely to **churn**
+based on subscription and behavioral information.
 
-This tool can help companies identify **high-risk customers** and implement
-retention strategies.
-""")
+Provide the customer details in the sidebar and click **Predict Churn**.
+"""
+)
 
-st.divider()
-
-# -------------------------------------------------------
-# SIDEBAR INPUT
-# -------------------------------------------------------
-
+# 6. SIDEBAR INPUTS
 st.sidebar.header("Customer Information")
 
 tenure = st.sidebar.slider(
-    "Tenure (months)",
-    0,
-    72,
-    12
+    "Tenure (Months)",
+    0, 72, 12
 )
 
 monthly_charges = st.sidebar.slider(
-    "Monthly Charges",
-    10,
-    150,
-    70
+    "Monthly Charges ($)",
+    10.0, 150.0, 70.0
 )
 
-total_charges = st.sidebar.slider(
+total_charges = st.sidebar.number_input(
     "Total Charges",
-    0,
-    10000,
-    2000
-)
-
-senior_citizen = st.sidebar.selectbox(
-    "Senior Citizen",
-    [0,1]
-)
-
-paperless = st.sidebar.selectbox(
-    "Paperless Billing",
-    [0,1]
+    min_value=0.0,
+    value=500.0
 )
 
 contract = st.sidebar.selectbox(
     "Contract Type",
-    ["Month-to-month","One year","Two year"]
+    ["Month-to-month", "One year", "Two year"]
 )
 
-payment = st.sidebar.selectbox(
+payment_method = st.sidebar.selectbox(
     "Payment Method",
-    ["Electronic Check","Credit Card","Bank Transfer"]
+    [
+        "Electronic check",
+        "Mailed check",
+        "Bank transfer (automatic)",
+        "Credit card (automatic)"
+    ]
 )
 
-# -------------------------------------------------------
-# FEATURE ENGINEERING
-# -------------------------------------------------------
+paperless_billing = st.sidebar.selectbox(
+    "Paperless Billing",
+    ["Yes", "No"]
+)
 
-def create_input_dataframe():
+senior_citizen = st.sidebar.selectbox(
+    "Senior Citizen",
+    ["Yes", "No"]
+)
+
+# 7. PREPROCESS USER INPUT
+def preprocess_input():
+    """Convert user input into model-ready dataframe"""
 
     data = {
-        "Tenure":[tenure],
-        "MonthlyCharges":[monthly_charges],
-        "TotalCharges":[total_charges],
-        "PaperlessBilling":[paperless],
-        "SeniorCitizen":[senior_citizen],
-        "Contract_One year":[0],
-        "Contract_Two year":[0],
-        "PaymentMethod_Credit Card":[0],
-        "PaymentMethod_Electronic Check":[0]
+        "Tenure": tenure,
+        "MonthlyCharges": monthly_charges,
+        "TotalCharges": total_charges,
+        "SeniorCitizen": 1 if senior_citizen == "Yes" else 0,
+        "PaperlessBilling": 1 if paperless_billing == "Yes" else 0,
+        "Contract": contract,
+        "PaymentMethod": payment_method
     }
 
-    if contract == "One year":
-        data["Contract_One year"] = [1]
+    df = pd.DataFrame([data])
 
-    if contract == "Two year":
-        data["Contract_Two year"] = [1]
+    # Apply one-hot encoding
+    df = pd.get_dummies(df)
 
-    if payment == "Credit Card":
-        data["PaymentMethod_Credit Card"] = [1]
+    # Get feature names expected by model
+    model_features = model.feature_names_in_
 
-    if payment == "Electronic Check":
-        data["PaymentMethod_Electronic Check"] = [1]
+    # Add missing columns
+    for col in model_features:
+        if col not in df.columns:
+            df[col] = 0
 
-    return pd.DataFrame(data)
+    # Keep only model features in correct order
+    df = df[model_features]
 
-# -------------------------------------------------------
-# PREDICTION BUTTON
-# -------------------------------------------------------
+    return df
 
+# 8. PREDICTION
 if st.button("Predict Churn"):
 
-    input_df = create_input_dataframe()
-
-    prediction = model.predict(input_df)[0]
-
-    probability = model.predict_proba(input_df)[0][1]
-
-    st.subheader("Prediction Result")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        if prediction == 1:
-            st.error("⚠️ Customer Likely To Churn")
-        else:
-            st.success("✅ Customer Likely To Stay")
-
-    with col2:
-
-        st.metric(
-            "Churn Probability",
-            f"{probability*100:.2f}%"
-        )
-
-    st.divider()
-
-    # -------------------------------------------------------
-    # RISK SEGMENTATION
-    # -------------------------------------------------------
-
-    if probability < 0.30:
-        risk = "Low Risk"
-        color = "green"
-
-    elif probability < 0.70:
-        risk = "Medium Risk"
-        color = "orange"
-
+    if model is None:
+        st.error("Model not available.")
     else:
-        risk = "High Risk"
-        color = "red"
 
-    st.subheader("Risk Segment")
+        input_df = preprocess_input()
 
-    st.markdown(f"### {risk}")
+        try:
 
-    # -------------------------------------------------------
-    # SHOW INPUT DATA
-    # -------------------------------------------------------
+            prediction = model.predict(input_df)[0]
+            probability = model.predict_proba(input_df)[0][1]
 
-    st.subheader("Customer Profile")
+            st.subheader("Prediction Result")
 
-    st.dataframe(input_df)
+            if prediction == 1:
+                st.error("⚠️ Customer is likely to churn")
+            else:
+                st.success("✅ Customer likely to stay")
 
-# -------------------------------------------------------
-# PROJECT INFO
-# -------------------------------------------------------
+            st.metric(
+                label="Churn Probability",
+                value=f"{probability*100:.2f}%"
+            )
 
-st.divider()
+        except Exception as e:
+            st.error("Prediction failed")
+            logger.error(e)
 
-st.markdown("""
-### About This Project
+# 9. FOOTER
+st.markdown("---")
 
-This machine learning model predicts telecom customer churn using:
-
-- Logistic Regression
-- Random Forest Classifier
-- Feature engineering and preprocessing
-- Hyperparameter tuning
-
-**Goal:** Identify customers at risk of leaving and enable proactive retention strategies.
-
----
-
-Author: **Dhanashree Tankar**
-
-Data Science Capstone Project
-""")
+st.caption(
+"Machine Learning Capstone Project — Customer Churn Prediction"
+)
